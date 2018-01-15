@@ -7,11 +7,14 @@
 JOURNAL=$HOME/documents/journal
 
 # gets date and time stamps
-DATE=$(date +%Y-%m-%d)
-TIME=$(date +%I:%M\ %p)
+DATE=$(date +%F)
+MONTH=$(date +%Y-%m)
+TIMESTAMP=$(date +%F\ %I:%M\ %P)
 
 # writes timestamp to today's journal
-echo $TIME' -  ' >> $JOURNAL/$DATE'.md'
+echo "" >> $JOURNAL/$MONTH'.md'
+echo '### '$TIMESTAMP':' >> $JOURNAL/$MONTH'.md'
+echo "" >> $JOURNAL/$MONTH'.md'
 
 # opens today's journal
-vim '+ normal GA' $JOURNAL/$DATE'.md'
+vim '+ normal Go' +star $JOURNAL/$MONTH'.md'
