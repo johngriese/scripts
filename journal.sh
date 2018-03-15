@@ -4,17 +4,28 @@
 # and timestamps each entry.
 
 # define journal location here
-JOURNAL=$HOME/documents/journal
+DIR=$HOME/documents/journal
 
 # gets date and time stamps
-DATE=$(date +%F)
 MONTH=$(date +%Y-%m)
-TIMESTAMP=$(date +%F\ %I:%M\ %P)
+TIMESTAMP=$(date +%I:%M\ %P)
+DATESTAMP=$(date +%A\ %b\ %d) 
 
-# writes timestamp to today's journal
-echo "" >> $JOURNAL/$MONTH'.md'
-echo '### '$TIMESTAMP':' >> $JOURNAL/$MONTH'.md'
-echo "" >> $JOURNAL/$MONTH'.md'
+# shorthand for monthly file
+FILE=$DIR/$MONTH'.md'
 
-# opens today's journal
-vim '+ normal Go' +star $JOURNAL/$MONTH'.md'
+
+# checks to see if datestamp exists yet
+if grep -Fxq '## '"$DATESTAMP" $FILE
+    then
+        echo "" >> $FILE
+        echo '*'$TIMESTAMP':*  ' >> $FILE
+    else
+        echo "" >> $FILE
+        echo '## '$DATESTAMP >> $FILE
+        echo "" >> $FILE
+        echo '*'$TIMESTAMP':*  ' >> $FILE
+fi
+
+# opens today's journal appending to last line
+vim '+ normal G$' +star $FILE
