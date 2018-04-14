@@ -13,6 +13,5 @@ rdiff-backup \
         --exclude $HOME'/.*' \
         --exclude $HOME/temp \
         --exclude $HOME/downloads \
-        --exclude $HOME/pictures/.extra \
         $TARGET \
         $BACKUP
