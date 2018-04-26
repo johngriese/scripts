@@ -5,7 +5,7 @@
 
 # define hostname of backup
 HOST="pi"
-BACKUP="pi:/mnt/raid1/backup"
+BACKUP="pi::/mnt/raid1/backup/home"
 
 # test connection. If is is, return "-"
 if ping -c 1 $HOST &> /dev/null
@@ -14,7 +14,7 @@ then
         if ! pgrep "rdiff-backup" > /dev/null
         then
                  # fine the time of the most recent backup
-                TIME=$(rdiff-backup -l --parsable-output pi::/mnt/raid1/backup | tail -1 | grep -o -E '[0-9]+')
+                TIME=$(rdiff-backup -l --parsable-output $BACKUP | tail -1 | grep -o -E '[0-9]+')
                 # get the current time in Ecoch
                 NOW=$(date +%s)
                 # find time difference in seconds
