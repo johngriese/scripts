@@ -1,22 +1,24 @@
 #!/bin/bash
 
 ##### bkp.sh #####
-# A tiny backup script using rdiff-backup.
+# A tiny backup script using rsync
 
-rdiff-backup \
-        -v5 \
-        --exclude $HOME'/.*' \
-        --exclude $HOME/temp \
+# define local directory to backup
+LOCAL=$HOME
+
+# define remove directory to backup to
+REMOTE=pi:/home/rad/backup
+ 
+# begin rsync with the following flags
+#   -a: archive mode. Recursive, preserve links, etc.
+#   --verbose: tell me more!
+#   --exclude the following directories:
+#       ~/download
+#       ~/temp
+rsync   \
+        -a \
+        --verbose \
         --exclude $HOME/downloads \
-        $HOME \
-        pi::/mnt/raid1/backup/home
-
-rdiff-backup \
-        -v5 \
-        /var/lib/dokuwiki/data \
-        pi::/mnt/raid1/backup/dokuwiki/data
-
-rdiff-backup \
-        -v5 \
-        /etc/webapps/dokuwiki \
-        pi::/mnt/raid1/backup/dokuwiki/conf
+        --exclude $HOME/temp \
+        $LOCAL \
+        $REMOTE
