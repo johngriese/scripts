@@ -4,13 +4,13 @@ The `bashrc` file in my [dotfiles](https://github.com/veryrad/dotfiles) automati
 Each script is explained below, with details and examples for usage, options, configuration, and dependencies.
 
 The aggregate dependencies for all scripts are:
-* dmenu
-* vim
-* basename
-* getopts
+* *dmenu*
+* *vim*
+* *basename*
+* *getopts*
 
 ## dmu ##
-The setting I like for `dmenu`.
+The setting I like for *dmenu*.
 Just run it.
 
 ### Dependencies ###
@@ -22,19 +22,25 @@ Allows for maintaining multiple journals for different topics.
 
 ### Usage ###
 No options are required to use the journal.
-Simply calling `journal.sh` will open today's entry in the default journal in Vim.
+Simply calling 
+```
+$ journal.sh
+``` 
+will open today's entry in the default journal in Vim.
 
 #### Help (-h) ####
-`journal.sh -h` will show the usage.
-This is a handy quick reference if you don't feel like refering back to this document.
+```
+$ journal.sh -h
+``` 
+shows the usage.
 
 #### Directory (-d) ####
 A specific directory can be specified by using the `-d` option.
 For example, entering
 ```
-journal.sh -d foo
+$ journal.sh -d foo
 ```
-will record an entry in *foo* rather than the default journal, *main*.
+will record an entry in *foo** rather than the default journal, **main*.
 
 
 ### Configuration ###
