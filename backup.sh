@@ -14,7 +14,7 @@ case "$HOSTNAME" in
            echo "cannot reach $BACKUPHOST; aborting" 
            exit 1
         fi
-        rsync_tmbackup.sh /home/rad "$BACKUPHOST:/$BACKUPDIR/$HOSTNAME" "$EXCLUDEFILE" 
+        rsync_tmbackup.sh /home/rad "rad@$BACKUPHOST:$BACKUPDIR/$HOSTNAME" "$EXCLUDEFILE" 
         ;;
     *)
         echo "not running from a known host; aborting"
