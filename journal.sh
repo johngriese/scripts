@@ -71,6 +71,5 @@ touch "$FILE"
 echo "" >> "$FILE"
 datestamp "$FILE"
 timestamp "$FILE"
-echo "" >> "$FILE"
 append "$FILE"
 exit 0

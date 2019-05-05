@@ -1,9 +1,8 @@
 #!/bin/bash
 #
-# Opens a file in vim, moves to the last line,
+# Concatenates a blank line to a file,
+# opens the file in vim, 
+# moves to the beginning of the last line,
 # and enters insert mode.
-#
-# Could probably just be an alias, but is 
-# integral to some scripts so it's here for now.
-
+echo "" >> "$1"
 vim '+ normal G$' +star "$1"

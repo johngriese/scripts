@@ -6,5 +6,4 @@ DATE=$(date +%A\ %d\ %b\ %Y)
 DATESTAMP='## '"$DATE"' ##'
 if ! grep -Fxq "$DATESTAMP" "$1" ; then
     echo "$DATESTAMP" >> "$1"
-    echo "" >> "$1"
 fi
