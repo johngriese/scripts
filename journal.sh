@@ -7,7 +7,7 @@
 # USER CONFIG #
 
 # define default journal location here:
-JOURNAL="$HOME/journal"
+JOURNAL="$HOME/notebook/journal"
 
 # USAGE #
 
