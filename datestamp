@@ -1,15 +1,10 @@
 #!/bin/bash
 #
-# Timestamp a file the way I like it!
+# Datestamp a file the way I like it!
 # 
-# TODO:
-#  - write markup
-#  - figure out input
-
 DATE=$(date +%A\ %d\ %b\ %Y)
 DATESTAMP='## '"$DATE"' ##'
 if ! grep -Fxq "$DATESTAMP" "$1" ; then
-    echo "" >> "$1"
     echo "$DATESTAMP" >> "$1"
     echo "" >> "$1"
 fi

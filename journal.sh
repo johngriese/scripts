@@ -7,7 +7,7 @@
 # USER CONFIG #
 
 # define default journal location here:
-JOURNAL="$HOME/documents/journal"
+JOURNAL="$HOME/journal"
 
 # USAGE #
 
@@ -47,60 +47,30 @@ shift $((OPTIND - 1))
 MONTH=$(date +%Y-%m)
 DATE=$(date +%Y-%m-%d)
 
-# gets timestamp and datestamp for journal entry
-TIMESTAMP=$(date +%I:%M\ %P)
-DATESTAMP=$(date +%A\ %b\ %d)
-
-# defines time/datestamp function
-stamp () {
-  if grep -Fxq '## '"$DATESTAMP"' ##' "$1"
-    then
-      echo "" >> "$1"
-      echo '### '"$TIMESTAMP"' ###' >> "$1"
-      echo "" >> "$1"
-    else
-      echo "" >> "$1"
-      echo '## '"$DATESTAMP"' ##' >> "$1"
-      echo "" >> "$1"
-      echo '### '"$TIMESTAMP"' ###' >> "$1"
-      echo "" >> "$1"
-  fi
-}
-
-# opens today's journal appending to last line
-append () { 
-  vim '+ normal G$' +star "$1"
-}
-# checks for the given file or folder.
-# makes one if not found.
-fileCheck () {
-  if ! [ -e "$1" ]
-  then
-    touch "$1"
-  fi
-}
-
-dirCheck () {
-  if ! [ -e "$1" ]
-  then
-    mkdir -p "$1"
-  fi
-}
-
-# MAIN FUNCTION #
-
-# check for BASE and DEFAULT
-dirCheck "$BASE/$DEFAULT"
-
-# check for specified DIR
-# ask for user input if not existing
-
 # gets file name of today's journal
 FILE="$JOURNAL/$MONTH/$DATE.md"
 
+# MAIN FUNCTION #
+
+# check if $JOURNAL exists
+# if not, exit with error
+if ! [ -e "$JOURNAL" ] ; then
+    echo "Journal directory not found: $JOURNAL"
+    echo "Make the directory or edit the journal script to set a new one."
+    echo "Aborting."
+    exit 1
+fi
+
+# create a month directory if one isn't already present
+if ! [ -e "$JOURNAL/$MONTH" ] ; then
+    mkdir "$JOURNAL/$MONTH"
+fi
+
 # make an entry at today's file
-dirCheck "$JOURNAL/$MONTH"
-fileCheck "$FILE"
-stamp "$FILE"
+touch "$FILE"
+echo "" >> "$FILE"
+datestamp "$FILE"
+timestamp "$FILE"
+echo "" >> "$FILE"
 append "$FILE"
 exit 0
