@@ -7,38 +7,26 @@
 # USER CONFIG #
 
 # define default journal location here:
-BASE="$HOME/documents/journal"
-DEFAULT="main"
+JOURNAL="$HOME/documents/journal"
 
 # USAGE #
 
 usage="
-$(basename "$0") [-h] [-f foo] -- small bash journaling script
+$(basename "$0") [-h] -- small bash journaling script
 
 OPTIONS: 
   -h       -- show this help text
-  -d foo   -- writes journal in directory 'foo' rather than the default.
 
 CONFIGURATION:
 Set the DIR user variable to where you'd like your journal saved
 By default, entries are stored in: \$HOME/documents/journal
 "
-
-# TODO: add -l flag to list existing sub-directories in the base directory.
-
 # OPTIONS #
-
-# initialize DIR to DEFAULT
-DIR="$DEFAULT"
-
 while getopts "hd:" OPT; do
   case $OPT in
     h)
       echo "$usage"
       exit 0
-      ;;
-    d)
-      DIR="$OPTARG"
       ;;
     :) 
       printf "missing argument for -%s\n" "$OPTARG"
@@ -56,7 +44,6 @@ shift $((OPTIND - 1))
 # DEFINITIONS #
 
 # gets date and time and records stamps
-JOURNAL="$BASE/$DIR"
 MONTH=$(date +%Y-%m)
 DATE=$(date +%Y-%m-%d)
 
@@ -107,19 +94,6 @@ dirCheck "$BASE/$DEFAULT"
 
 # check for specified DIR
 # ask for user input if not existing
-
-if ! [ -e "$BASE/$DIR" ]
-then 
-  echo "Journal directory '$DIR' does not exist!"
-  read -r -p "Create directory? [y]es/[N]o? " response
-  if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
-  then 
-    mkdir -p "$BASE/$DIR"
-  else
-    echo "Entry aborted."
-    exit 0
-  fi
-fi
 
 # gets file name of today's journal
 FILE="$JOURNAL/$MONTH/$DATE.md"
