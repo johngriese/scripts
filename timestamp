@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Timestamps a file the way I like it!
+
+TIME=$(date +%I:%M\ %P)
+TIMESTAMP='### '"$TIME"' ###'
+echo "$TIMESTAMP" >> "$1"

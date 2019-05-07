@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Concatenates a blank line to a file,
+# opens the file in vim, 
+# moves to the beginning of the last line,
+# and enters insert mode.
+echo "" >> "$1"
+vim '+ normal G$' +star "$1"
