@@ -68,8 +68,8 @@ fi
 
 # make an entry at today's file
 touch "$FILE"
-echo "" >> "$FILE"
 datestamp "$FILE"
+echo "" >> "$FILE"
 timestamp "$FILE"
 append "$FILE"
 exit 0
